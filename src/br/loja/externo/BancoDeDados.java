@@ -5,12 +5,14 @@ import br.loja.entidades.Pedido;
 import br.loja.entidades.Produto;
 import br.loja.entidades.Vendedor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BancoDeDados {
-    static List<Produto> produtos;
+    static List<Produto> produtos = new ArrayList<>();
+    static List<Cliente> clientes = new ArrayList<>();
+
     List<Pedido> pedidos;
-    static List<Cliente> clientes;
     List<Vendedor> vendedors;
 
     public static void addProduto(Produto produto){
@@ -43,5 +45,9 @@ public class BancoDeDados {
             }
         }
         throw new NullPointerException("Cliente não existe na banco de dados");
+    };
+    public static void clearBD(){
+        produtos.clear();
+        clientes.clear();
     };
 }
