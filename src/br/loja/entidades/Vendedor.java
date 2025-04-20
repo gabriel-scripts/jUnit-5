@@ -8,10 +8,10 @@ public class Vendedor {
 
     public Vendedor(int id, String name, float salary, int age) {
         if (salary < 663){
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("Salario invalido");
         }
         if (age < 14){
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("Idade inválida");
         }
         this.id = id;
         this.name = name;

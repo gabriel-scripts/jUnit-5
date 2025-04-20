@@ -1,10 +1,13 @@
 package br.loja.controllers;
+import br.loja.entidades.Pedido;
 import br.loja.enums.Status;
 
 public class Expedir {
     Status status;
+    Pedido pedido;
 
-    public Expedir(Status status) {
+    public Expedir(Pedido pedido) {
+        this.pedido = pedido;
         this.status = Status.NOTA_EMITIDA;
     }
 

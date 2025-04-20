@@ -12,10 +12,15 @@ public class Financeiro {
     }
     public void processarPedido(){
         System.out.println("Iniciando processamento do pedido.");
-        if(cliente.isInadimplente()){
-            status = Status.FINALIZADO;
-        }else{
+        try {
+            if(cliente.isInadimplente()){
+                status = Status.FINALIZADO;
+            }else{
+                status = Status.CANCELADO;
+            }
 
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao processar o cliente",  e);
         }
     }
 }

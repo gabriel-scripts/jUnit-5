@@ -5,25 +5,30 @@ public class Cliente {
     private String cpf;
     private int age;
     private boolean inadimplente;
-    private int saldo;
+    private float saldo;
 
     public Cliente(String name, String cpf, int age) {
+        if (name.isBlank()){
+            throw new IllegalArgumentException("[error] Valor nulo.");
+        }
         this.name = name;
         this.cpf = cpf;
         this.age = age;
         this.inadimplente = false;
+        this.saldo = 0.0F;
     }
+    public float getSaldo(){return  saldo;};
+    public void setSaldo(float saldo) { this.saldo = saldo; }
+   
     public String getName() {
         return name;
     }
-
+    
     public String getCpf() {
         return cpf;
     }
 
-    public int getAge() {
-        return age;
-    }
+    public int getAge() { return age; }
 
     public boolean isInadimplente() {
         return inadimplente;
@@ -33,8 +38,8 @@ public class Cliente {
         this.inadimplente = !this.inadimplente;
     }
 
-    public void validateAge(){
-        if (age > 130 || age < 0){
+    public void validateAge(int age){
+        if (this.age > 130 || this.age < 0){
             throw new IllegalArgumentException("Idade inválida.");
         }
     }

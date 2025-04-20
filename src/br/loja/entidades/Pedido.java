@@ -1,34 +1,44 @@
 package br.loja.entidades;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
     private int id;
     private Cliente cliente;
-    private Vendedor vendedor; // A ser utilizado se necessário
-    private HashSet<Produto> produtos;
+    private Vendedor vendedor;
+    private List<Produto> produtos;
 
-    // Construtor principal que inicializa todos os atributos necessários
-    public Pedido(int id, Cliente cliente, List<Produto> produtosIniciais) {
+    public Pedido(int id, Cliente cliente, List<Produto> produtosIniciais, Vendedor vendedor) {
         this.id = id;
         this.cliente = cliente;
-        this.produtos = new HashSet<>();
+        this.produtos = new ArrayList<>();
         if (produtosIniciais != null) {
             this.produtos.addAll(produtosIniciais);
         }
+        this.vendedor = vendedor;
     }
 
-    // Construtor alternativo: neste caso, é importante inicializar a coleção e o id pode ser definido depois
-    public Pedido(Cliente cliente) {
-        // Dependendo do contexto, você pode gerar um id automaticamente ou definir um padrão
+    public Pedido(Cliente cliente, Vendedor vendedor) {
         this.cliente = cliente;
-        this.produtos = new HashSet<>();
+        this.vendedor = vendedor;
+        this.produtos = new ArrayList<>();
     }
 
-    // Método unificado para adicionar um produto
     public void adicionarProduto(Produto produto) {
         this.produtos.add(produto);
+    }
+
+    public boolean removerProduto(Produto produto) {
+        return this.produtos.remove(produto);
+    }
+
+    public float calcularValorTotal() {
+        float total = 0;
+        for (Produto p : produtos) {
+            total += p.getPrice();
+        }
+        return total;
     }
 
     public int getId() {
@@ -39,19 +49,21 @@ public class Pedido {
         return cliente;
     }
 
-    public HashSet<Produto> getProdutos() {
+    public List<Produto> getProdutos() {
         return produtos;
     }
 
-    public boolean removerProduto(Produto produto){
-        return this.produtos.remove(produto);
+    public Vendedor getVendedor() {
+        return vendedor;
     }
 
-    public float calcularValorTotal() {
-        float total = 0;
-        for (Produto p : produtos){
-            total += p.getPrice();
-        }
-        return total;
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "id=" + id +
+                ", cliente=" + cliente +
+                ", vendedor=" + vendedor +
+                ", produtos=" + produtos +
+                '}';
     }
 }
